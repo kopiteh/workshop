@@ -15,17 +15,19 @@ public class App
         List<String> cart = new ArrayList<>();
         
         Scanner scan = new Scanner(System.in);
-        String prompt = scan.nextLine();
+        String prompt = scan.next();
+        String wishlist = scan.nextLine();
         
         int n = 0;
 
         while (n==0) //This is to loop the programe until an "end" command is triggered.
         {  
-            while (!prompt.startsWith("list") && !prompt.startsWith("delete") && !prompt.startsWith("add"))
+            while (!prompt.startsWith("list") && !prompt.startsWith("delete") && !prompt.startsWith("add") && !prompt.startsWith("end"))
             
             {
                 System.out.println("Please use only the following command: 'list', 'add' or 'delete'");
-                prompt = scan.nextLine();
+                prompt = scan.next();
+                wishlist = scan.nextLine();
             }
             
             while (prompt.startsWith("list"))
@@ -44,14 +46,14 @@ public class App
                         x = x+1 ; 
                     }
                 }
-
-                prompt = scan.nextLine();
+                prompt = scan.next();
+                wishlist = scan.nextLine();
             }
 
             while (prompt.startsWith("add")) //Add items 
             {
-                prompt = prompt.split(" ")[1].trim();
-                String[] items = prompt.split(",");
+                //prompt = prompt.split(" ")[1].trim();
+                String[] items = wishlist.trim().split(",");
 
                 for (String x: items)
                 {
@@ -64,24 +66,27 @@ public class App
                     }
                 }
 
-                prompt = scan.nextLine();
+                prompt = scan.next();
+                wishlist = scan.nextLine();
             }
             
             while (prompt.startsWith("delete"))
             {
-                int y = Integer.valueOf(prompt.split(" ")[1].trim());
+                int y = Integer.valueOf(wishlist.trim());
                 
                 if (y > cart.size())
                 {
                     System.out.println("Error. Invalid selection");
-                    prompt = scan.nextLine();
+                    prompt = scan.next();
+                    wishlist = scan.nextLine();
                 }
                 
                 else 
                 {
                     System.out.printf(cart.get(y-1) + " is removed.\n");
                     cart.remove(y-1);
-                    prompt = scan.nextLine();
+                    prompt = scan.next();
+                    wishlist = scan.nextLine();
                 }
             }
             
